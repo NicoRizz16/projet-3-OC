@@ -5,7 +5,8 @@ namespace CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -25,9 +26,18 @@ class CommandeType extends AbstractType
                 'expanded' => true,
                 'multiple' => false
             ))
-            ->add('nbBillets', NumberType::class)
-            ->add('mail', EmailType::class)
-            ->add('confirm', EmailType::class, array('mapped' => false))
+            ->add('nbBillets', RangeType::class, array(
+                'attr' => array(
+                    'min' => 1,
+                    'max' => 30
+                )
+            ))
+            ->add('mail', RepeatedType::class, array(
+                'type' => EmailType::class,
+                'invalid_message' => 'Les deux adresses mail doivent correspondre.',
+                'first_options' => array('label' => 'Adresse mail'),
+                'second_options' => array('label' => 'Confirmez l\'adresse mail')
+            ))
             ->add('valider', SubmitType::class)
         ;
     }

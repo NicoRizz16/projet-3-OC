@@ -3,6 +3,7 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commande
@@ -32,6 +33,10 @@ class Commande
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255)
+     * @Assert\Email(
+     *     message = "L'adresse mail entrée n'est pas valide.",
+     *     checkMX = true
+ *     )
      */
     private $mail;
 
@@ -44,6 +49,16 @@ class Commande
      * @var int
      *
      * @ORM\Column(name="nbBillets", type="smallint")
+     * @Assert\Type(
+     *     type="integer",
+     *     message="La valeur entrée n'est pas un type valide."
+     * )
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 30,
+     *      minMessage = "Vous devez commander au moins un billet.",
+     *      maxMessage = "Vous ne pouvez pas commander plus de 30 billets d'un coup."
+     * )
      */
     private $nbBillets;
 
@@ -51,6 +66,7 @@ class Commande
      * @var string
      *
      * @ORM\Column(name="typeBillet", type="string", length=255)
+     * @Assert\Choice({"Journée", "Demi-journée"})
      */
     private $typeBillet;
 
@@ -58,6 +74,8 @@ class Commande
      * @var \DateTime
      *
      * @ORM\Column(name="dateVisite", type="datetime")
+     * @Assert\Date()
+     * @Assert\GreaterThanOrEqual("today")
      */
     private $dateVisite;
 
