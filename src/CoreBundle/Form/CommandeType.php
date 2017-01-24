@@ -5,7 +5,7 @@ namespace CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,11 +26,9 @@ class CommandeType extends AbstractType
                 'expanded' => true,
                 'multiple' => false
             ))
-            ->add('nbBillets', RangeType::class, array(
-                'attr' => array(
-                    'min' => 1,
-                    'max' => 30
-                )
+            ->add('nbBillets', IntegerType::class, array(
+                'scale' => 0,
+                'label' => "Nombre de billets"
             ))
             ->add('mail', RepeatedType::class, array(
                 'type' => EmailType::class,
