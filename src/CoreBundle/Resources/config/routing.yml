@@ -1,3 +1,25 @@
 core_homepage:
     path:     /
     defaults: { _controller: CoreBundle:Order:index }
+
+core_infosCommande:
+    path:    /infosCommande
+    defaults: { _controller: CoreBundle:Order:infosCommande }
+
+core_infosBillets:
+    path:    /infosBillets
+    defaults: { _controller: CoreBundle:Order:infosBillets }
+
+core_paiement:
+    path:    /paiement
+    defaults: { _controller: CoreBundle:Order:paiement }
+
+core_confirm:
+    path:    /confirm
+    defaults: { _controller: CoreBundle:Order:confirm }
+
+core_erreur:
+    path:    /erreur
+    defaults: { _controller: CoreBundle:Order:erreur }
+
+

@@ -61,6 +61,15 @@ class Commande
      */
     private $dateVisite;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dateCommande = new \Datetime();
+        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -190,13 +199,6 @@ class Commande
     public function getDateVisite()
     {
         return $this->dateVisite;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
