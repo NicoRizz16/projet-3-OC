@@ -1,1 +1,20 @@
-Hello World!
+{% extends "CoreBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <p class="well col-md-8 col-md-offset-2">
+    Bienvenue sur le service de billeterie en ligne du musée du Louvre !
+    Vous en avez assez de perdre votre temps dans les files d'attentes alors que vous pourriez déjà être entrain de profiter du musée ?
+    Le musée du Louvre a trouvé la solution pour vous. Commandez dès maintenant vos billets en ligne...
+    </p>
+
+    <div class="text-center">
+        <a href="{{ path('core_homepage') }}" class="btn btn-primary btn-lg">Réserver mes billets maintenant</a>
+    </div>
+
+{% endblock %}
