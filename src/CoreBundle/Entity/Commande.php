@@ -4,6 +4,7 @@ namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use CoreBundle\Validator\MuseumOpen;
 
 /**
  * Commande
@@ -77,6 +78,7 @@ class Commande
      * @ORM\Column(name="dateVisite", type="datetime")
      * @Assert\Date()
      * @Assert\GreaterThanOrEqual("today")
+     * @MuseumOpen()
      */
     private $dateVisite;
 
