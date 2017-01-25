@@ -30,8 +30,8 @@
       <file leaf-file-name="Commande.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="80" column="20" lean-forward="false" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+            <state relative-caret-position="-435">
+              <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
               <folding>
                 <element signature="e#37#69#0#PHP" expanded="true" />
               </folding>
@@ -39,21 +39,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MuseumOpen.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpen.php">
+      <file leaf-file-name="ReservationOpen.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpen.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="60" lean-forward="false" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+            <state relative-caret-position="195">
+              <caret line="13" column="127" lean-forward="false" selection-start-line="13" selection-start-column="127" selection-end-line="13" selection-end-column="127" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MuseumOpenValidator.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpenValidator.php">
+      <file leaf-file-name="ReservationOpenValidator.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpenValidator.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="28" column="112" lean-forward="false" selection-start-line="28" selection-start-column="112" selection-end-line="28" selection-end-column="112" />
+            <state relative-caret-position="538">
+              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
                 <element signature="e#124#167#0#PHP" expanded="true" />
               </folding>
@@ -150,8 +150,10 @@
         <option value="$PROJECT_DIR$/src/CoreBundle/Resources/views/Order/paiement.html.twig" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Controller/OrderController.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpen.php" />
-        <option value="$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpenValidator.php" />
+        <option value="$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpen.php" />
+        <option value="$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php" />
+        <option value="$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpenValidator.php" />
       </list>
     </option>
   </component>
@@ -560,12 +562,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485235168688</updated>
-      <workItem from="1485235170063" duration="30603000" />
+      <workItem from="1485235170063" duration="35902000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30603000" />
+    <option name="totallyTimeSpent" value="35902000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="-110" width="1920" height="1080" extended-state="0" />
@@ -769,7 +771,7 @@
         <state relative-caret-position="450">
           <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
           <folding>
-            <element signature="e#35#75#0#PHP" expanded="true" />
+            <element signature="e#35#75#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -840,26 +842,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="80" column="20" lean-forward="false" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+        <state relative-caret-position="-435">
+          <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
           <folding>
             <element signature="e#37#69#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpen.php">
+    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpen.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="60" lean-forward="false" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+        <state relative-caret-position="195">
+          <caret line="13" column="127" lean-forward="false" selection-start-line="13" selection-start-column="127" selection-end-line="13" selection-end-column="127" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpenValidator.php">
+    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpenValidator.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="28" column="112" lean-forward="false" selection-start-line="28" selection-start-column="112" selection-end-line="28" selection-end-column="112" />
+        <state relative-caret-position="538">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="e#124#167#0#PHP" expanded="true" />
           </folding>
