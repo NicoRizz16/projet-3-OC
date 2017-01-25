@@ -25,6 +25,12 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "Votre nom doit faire au minimum 2 caractères."
+     *     maxMessage = "Votre nom doit faire au maximum 50 caractères."
+     * )
      */
     private $nom;
 
@@ -32,6 +38,12 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255)
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "Votre prenom doit faire au minimum 2 caractères."
+     *     maxMessage = "Votre prenom doit faire au maximum 50 caractères."
+     * )
      */
     private $prenom;
 
@@ -39,6 +51,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=255)
+     * @Assert\Country()
      */
     private $pays;
 
@@ -46,6 +59,9 @@ class Billet
      * @var \DateTime
      *
      * @ORM\Column(name="dateNaissance", type="date")
+     * @Assert\Date()
+     * @Assert\LessThanOrEqual("today")
+     *
      */
     private $dateNaissance;
 
@@ -60,6 +76,7 @@ class Billet
      * @var boolean
      *
      * @ORM\Column(name="tarif_reduit", type="boolean")
+     * @Assert\Type("bool")
      */
     private $tarifReduit;
 

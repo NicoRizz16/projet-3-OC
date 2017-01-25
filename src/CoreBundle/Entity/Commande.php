@@ -42,6 +42,7 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Assert\Valid
      */
     private $billets;
 

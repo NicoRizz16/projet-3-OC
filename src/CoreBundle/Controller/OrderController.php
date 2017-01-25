@@ -73,6 +73,8 @@ class OrderController extends Controller
 
             // On met à jour les informations sur la commande dans la session
             $session->set('commande', $commande);
+            // On indique que la commande est prête pour l'étape 3
+            $session->set('readyToPay', true);
 
             // Puis on redirige vers l'étape suivante
             return $this->redirectToRoute('core_paiement');
@@ -87,9 +89,14 @@ class OrderController extends Controller
 
 
     // Etape 3 de la commande : Récapitulatif et paiement.
-    public function paiementAction()
+    public function paiementAction(Request $request)
     {
+        $session = $request->getSession();
+        $commande = $session->get('commande');
 
+        if(!$session->get('readyToPay')){
+            return $this->redirectToRoute('core_infosBillets');
+        }
     }
 
 
