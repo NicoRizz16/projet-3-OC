@@ -1,0 +1,28 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Billets - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+    {# iterate over each existing billet and render it #}
+    {% set i = 1 %}
+    {% for billet in form.billets %}
+        <h2>Billet numéro {{ i }}</h2>
+        <div class="well">
+            {{ form_row(billet.nom) }}
+            {{ form_row(billet.prenom) }}
+            {{ form_row(billet.pays) }}
+            {{ form_row(billet.dateNaissance) }}
+            {{ form_row(billet.tarifReduit) }}
+        </div>
+        {% set i = i + 1 %}
+    {% endfor %}
+
+    {{ form_end(form) }}
+
+{% endblock %}

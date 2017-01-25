@@ -57,6 +57,20 @@ class Billet
     private $tarif;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="tarif_reduit", type="boolean")
+     */
+    private $tarifReduit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix", type="smallint")
+     */
+    private $prix;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255, unique=true)
@@ -217,5 +231,52 @@ class Billet
     {
         return $this->code;
     }
-}
 
+    /**
+     * Set tarifReduit
+     *
+     * @param boolean $tarifReduit
+     *
+     * @return Billet
+     */
+    public function setTarifReduit($tarifReduit)
+    {
+        $this->tarifReduit = $tarifReduit;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifReduit
+     *
+     * @return boolean
+     */
+    public function getTarifReduit()
+    {
+        return $this->tarifReduit;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Billet
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+}

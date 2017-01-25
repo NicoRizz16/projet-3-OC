@@ -8,10 +8,12 @@
 
 namespace CoreBundle\Controller;
 
+use CoreBundle\Entity\Billet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Entity\Commande;
 use CoreBundle\Form\CommandeType;
+use CoreBundle\Form\CommandeBilletsType;
 
 
 class OrderController extends Controller
@@ -32,13 +34,17 @@ class OrderController extends Controller
 
         // Si la requête est en POST c'est que le visiteur a soumis un formulaire
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-
+            // On ajoute le nombre de billets souhaité à la commande
+            for($i=1; $i<=$commande->getNbBillets(); $i++){
+                $billet = new Billet();
+                $commande->addBillet($billet);
+            }
             // On stocke les informations sur la commande dans une variable session
             $session = $request->getSession();
             $session->set('commande', $commande);
 
             // Puis on redirige vers l'étape suivante
-            return $this->redirectToRoute('core_infosBillet');
+            return $this->redirectToRoute('core_infosBillets');
 
         }
 
@@ -56,8 +62,26 @@ class OrderController extends Controller
         $commande = $session->get('commande');
         // Si on a pas d'informations sur la commande dans la session on retourne à l'étape 1.
         if(!isset($commande)){
-            return $this->redirectToRoute('core_homepage');
+            return $this->redirectToRoute('core_infosCommande');
         }
+
+        $form = $this->get('form.factory')->create(CommandeBilletsType::class, $commande);
+
+        // Si la requête est en POST c'est que le visiteur a soumis un formulaire
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+            // On fait appel à un service pour calculer le tarif et le prix de chaque billet
+
+            // On met à jour les informations sur la commande dans la session
+            $session->set('commande', $commande);
+
+            // Puis on redirige vers l'étape suivante
+            return $this->redirectToRoute('core_paiement');
+        }
+
+        // Sinon on affiche la vue avec le formulaire
+        return $this->render('CoreBundle:Order:infosBillets.html.twig', array(
+            'form' => $form->createView(),
+        ));
 
     }
 

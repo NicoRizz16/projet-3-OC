@@ -24,7 +24,8 @@ class CommandeType extends AbstractType
             ->add('typeBillet',ChoiceType::class, array(
                 'choices' => array('Journée' => "Journée", "Demi-journée" => "Demi-journée"),
                 'expanded' => true,
-                'multiple' => false
+                'multiple' => false,
+                'data' => 'Journée'
             ))
             ->add('nbBillets', IntegerType::class, array(
                 'scale' => 0,
