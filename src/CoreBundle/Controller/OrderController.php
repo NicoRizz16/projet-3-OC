@@ -94,9 +94,16 @@ class OrderController extends Controller
         $session = $request->getSession();
         $commande = $session->get('commande');
 
+        // Si la commande n'est pas prête pour le réglement, retour aux étapes précédentes
         if(!$session->get('readyToPay')){
             return $this->redirectToRoute('core_infosBillets');
         }
+
+        // Sinon afficher le template de récapitulatif de la commande proposant le paiement
+        return $this->render('CoreBundle:Order:paiement.html.twig', array(
+            'commande' => $commande
+        ));
+
     }
 
 

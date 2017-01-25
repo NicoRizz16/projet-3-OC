@@ -3,6 +3,8 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Billet
@@ -28,7 +30,7 @@ class Billet
      * @Assert\Length(
      *     min = 2,
      *     max = 50,
-     *     minMessage = "Votre nom doit faire au minimum 2 caractères."
+     *     minMessage = "Votre nom doit faire au minimum 2 caractères.",
      *     maxMessage = "Votre nom doit faire au maximum 50 caractères."
      * )
      */
@@ -41,7 +43,7 @@ class Billet
      * @Assert\Length(
      *     min = 2,
      *     max = 50,
-     *     minMessage = "Votre prenom doit faire au minimum 2 caractères."
+     *     minMessage = "Votre prenom doit faire au minimum 2 caractères.",
      *     maxMessage = "Votre prenom doit faire au maximum 50 caractères."
      * )
      */

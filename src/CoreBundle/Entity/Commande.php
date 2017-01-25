@@ -81,6 +81,12 @@ class Commande
     private $dateVisite;
 
     /**
+     * @var int
+     * @ORM\Column(name="prixTotal", type="integer")
+     */
+    private $prixTotal;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -252,5 +258,29 @@ class Commande
     public function getBillets()
     {
         return $this->billets;
+    }
+
+    /**
+     * Set prixTotal
+     *
+     * @param integer $prixTotal
+     *
+     * @return Commande
+     */
+    public function setPrixTotal($prixTotal)
+    {
+        $this->prixTotal = $prixTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get prixTotal
+     *
+     * @return integer
+     */
+    public function getPrixTotal()
+    {
+        return $this->prixTotal;
     }
 }
