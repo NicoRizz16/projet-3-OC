@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use CoreBundle\Validator\ReservationOpen;
 use CoreBundle\Validator\MuseumNotFull;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Commande
@@ -286,5 +287,27 @@ class Commande
     public function getPrixTotal()
     {
         return $this->prixTotal;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function isTypeBilletValid(ExecutionContextInterface $context)
+    {
+        $dateDuJour = new \DateTime();
+        $dateEntree = $this->getDateVisite();
+        // Si la date entrée est différente de la date du jour, les 2 types de billets sont possible
+        if($dateDuJour->format('Y-m-d') != $dateEntree->format('Y-m-d')) {
+            return;
+        }
+
+        // On vérifie qu'un billet de type journée n'est pas commandé le jour même après 14h.
+        if ($this->getTypeBillet() == "Journée" && $dateDuJour->format('G') >= 14){
+            // La règle est violée, on définit l'erreur
+            $context
+                ->buildViolation('Vous ne pouvez pas réserver un billet de type "journée" le jour même après 14h.')
+                ->atPath('typeBillet')
+                ->addViolation();
+        }
     }
 }
