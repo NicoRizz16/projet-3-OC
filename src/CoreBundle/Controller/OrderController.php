@@ -146,8 +146,9 @@ class OrderController extends Controller
         $em->persist($commande);
         $em->flush();
 
-        // On vide la session
-        $session->set('commande', '');
+        // On réinitialise la session
+        $session->set('commande', null);
+        $session->set('readyToPay', false);
 
         return $this->render('CoreBundle:Order:confirm.html.twig');
     }
