@@ -70,6 +70,7 @@ class OrderController extends Controller
         // Si la requête est en POST c'est que le visiteur a soumis un formulaire
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             // On fait appel à un service pour calculer le tarif et le prix de chaque billet
+            $commande = $this->get('core.setprice')->setTicketsPrice($commande);
 
             // On met à jour les informations sur la commande dans la session
             $session->set('commande', $commande);
@@ -103,7 +104,6 @@ class OrderController extends Controller
         return $this->render('CoreBundle:Order:paiement.html.twig', array(
             'commande' => $commande
         ));
-
     }
 
 
