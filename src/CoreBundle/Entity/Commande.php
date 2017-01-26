@@ -5,6 +5,7 @@ namespace CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use CoreBundle\Validator\ReservationOpen;
+use CoreBundle\Validator\MuseumNotFull;
 
 /**
  * Commande
@@ -79,6 +80,7 @@ class Commande
      * @Assert\Date()
      * @Assert\GreaterThanOrEqual("today")
      * @ReservationOpen()
+     * @MuseumNotFull()
      */
     private $dateVisite;
 

@@ -10,4 +10,14 @@ namespace CoreBundle\Repository;
  */
 class CommandeRepository extends \Doctrine\ORM\EntityRepository
 {
+    // Méthode récupérant le nombre de billets vendus pour une date donnée
+    public function sumTicketsSold(\DateTime $date)
+    {
+        $qb = $this->createQueryBuilder('c');
+        return $qb->add('where', $qb->expr()->eq('c.dateVisite', ':date_visite'))
+            ->setParameter('date_visite', $date, \Doctrine\DBAL\Types\Type::DATETIME)
+            ->select('SUM(c.nbBillets) as totalBillets')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
