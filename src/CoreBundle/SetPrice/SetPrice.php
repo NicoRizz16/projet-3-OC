@@ -22,6 +22,7 @@ class SetPrice
 
     public function setTicketsPrice(Commande $commande)
     {
+        $prixTotal = 0;
         // Traitement de tous les billets de la commande un par un
         foreach ($commande->getBillets() as $billet){
             if($billet->getTarifReduit()){  // Si le billet bénéficie d'un tarif réduit
@@ -47,8 +48,11 @@ class SetPrice
             if($commande->getTypeBillet()=="Demi-journée"){
                 $billet->setPrix($billet->getPrix()/2);
             }
-        }
 
+            // On ajoute le prix du billet au prix total
+            $prixTotal += $billet->getPrix();
+        }
+        $commande->setPrixTotal($prixTotal);
         return $commande;
     }
 

@@ -19,9 +19,25 @@
             Pays : {{ billet.pays }} <br/>
             Date de naissance : {{ billet.dateNaissance|date('Y-m-d') }} <br/>
             Tarif : {{ billet.tarif }} <br/>
-            Prix : {{ billet.prix }}
+            Prix : {{ billet.prix }} <br/>
+            <a href="{{ path('core_infosBillets') }}" class="btn btn-primary">Modifier</a>
         </div>
         {% set i = i + 1 %}
     {% endfor %}
+    <h2 class="text-center">Prix total : {{ commande.prixTotal }} €</h2>
+
+    <form action="{{ path('core_confirm') }}" method="POST">
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ key }}"
+                data-amount="{{ commande.prixTotal }}00"
+                data-name="Demo Site"
+                data-description="Widget"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-zip-code="true"
+                data-currency="eur">
+        </script>
+    </form>
 
 {% endblock %}

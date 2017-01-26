@@ -102,21 +102,60 @@ class OrderController extends Controller
 
         // Sinon afficher le template de récapitulatif de la commande proposant le paiement
         return $this->render('CoreBundle:Order:paiement.html.twig', array(
-            'commande' => $commande
+            'commande' => $commande,
+            'key' => $this->container->getParameter('stripe_public_key')
         ));
     }
 
 
     // Etape 4 de la commande : Confirmation et traitement de la commande
-    public function confirmAction()
+    public function confirmAction(Request $request)
     {
+        // clé secrète Stripe
+        \Stripe\Stripe::setApiKey($this->container->getParameter('stripe_private_key'));
+        // Récupération du token généré par le formulaire checkout
+        $token = $request->get('stripeToken');
 
+        $session = $request->getSession();
+        $commande = $session->get('commande');
+
+        try { // On procède au paiement
+            \Stripe\Charge::create(array(
+                "amount" => $commande->getPrixTotal()*100,
+                "currency" => "eur",
+                "description" => "Example charge",
+                "source" => $token,
+            ));
+        } catch(\Stripe\Error\Card $e) { // Gestion des erreurs concernant les informations de paiement
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+            $request->getSession()->getFlashBag()->add('erreur', $err['message']);
+            return $this->redirectToRoute('core_erreur');
+        } catch (\Stripe\Error\Base $e) { // Gestion globale des erreurs
+            $request->getSession()->getFlashBag()->add('erreur', 'Nous avons rencontré un problème lors de la procédure du paiement, veuillez réessayer.');
+            return $this->redirectToRoute('core_erreur');
+        }
+
+        // Génération d'un code unique pour chaque billet de la commande
+        foreach ($commande->getBillets() as $billet){
+            $billet->setCode(uniqid());
+        }
+
+        // On enregistre la commande
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($commande);
+        $em->flush();
+
+        // On vide la session
+        $session->set('commande', '');
+
+        return $this->render('CoreBundle:Order:confirm.html.twig');
     }
 
 
     // Erreur de paiement
     public function erreurAction()
     {
-
+        return $this->render('CoreBundle:Order:erreur.html.twig');
     }
 }
