@@ -241,7 +241,7 @@ class Commande
     public function addBillet(\CoreBundle\Entity\Billet $billet)
     {
         $this->billets[] = $billet;
-
+        $billet->setCommande($this);
         return $this;
     }
 

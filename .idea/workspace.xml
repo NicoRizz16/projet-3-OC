@@ -15,18 +15,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Controller/OrderController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="103" column="65" lean-forward="false" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="65" />
-              <folding>
-                <element signature="e#125#154#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoreBundle/Resources/config/services.yml">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,8 +50,8 @@
       <file leaf-file-name="Billet.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Billet.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-255">
-              <caret line="32" column="72" lean-forward="false" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
+            <state relative-caret-position="-3752">
+              <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
               <folding>
                 <element signature="e#37#69#0#PHP" expanded="true" />
               </folding>
@@ -71,12 +59,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="paiement.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Resources/views/Order/paiement.html.twig">
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Controller/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="72" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="26" selection-end-column="72" />
-              <folding />
+            <state relative-caret-position="1273">
+              <caret line="103" column="65" lean-forward="false" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="65" />
+              <folding>
+                <element signature="e#125#154#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Commande.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="243" column="36" lean-forward="true" selection-start-line="243" selection-start-column="36" selection-end-line="243" selection-end-column="36" />
+              <folding>
+                <element signature="e#37#69#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,11 +103,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config_test.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config_test.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/config_test.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,7 +139,6 @@
         <option value="$PROJECT_DIR$/src/CoreBundle/Form/CommandeBilletsType.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Form/BilletType.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Resources/views/Order/infosBillets.html.twig" />
-        <option value="$PROJECT_DIR$/src/CoreBundle/Entity/Billet.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpen.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Validator/MuseumOpenValidator.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Validator/ReservationOpen.php" />
@@ -153,11 +154,12 @@
         <option value="$PROJECT_DIR$/src/CoreBundle/Resources/views/Order/paiement.html.twig" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Controller/OrderController.php" />
         <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
-        <option value="$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/CoreBundle/Resources/views/Emails/billets.html.twig" />
         <option value="$PROJECT_DIR$/src/CoreBundle/EventListener/sendTickets.php" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/CoreBundle/Entity/Billet.php" />
+        <option value="$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php" />
       </list>
     </option>
   </component>
@@ -616,12 +618,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485235168688</updated>
-      <workItem from="1485235170063" duration="65219000" />
+      <workItem from="1485235170063" duration="66465000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65219000" />
+    <option name="totallyTimeSpent" value="66465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -906,16 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding>
-            <element signature="e#37#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -924,31 +916,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Controller/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="103" column="65" lean-forward="false" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="65" />
-          <folding>
-            <element signature="e#125#154#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoreBundle/Resources/views/Order/paiement.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="72" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="26" selection-end-column="72" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Billet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="32" column="72" lean-forward="false" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
-          <folding>
-            <element signature="e#37#69#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -965,16 +937,6 @@
         <state relative-caret-position="315">
           <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoreBundle/EventListener/sendTickets.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-          <folding>
-            <element signature="e#44#86#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1005,8 +967,48 @@
     <entry file="file://$PROJECT_DIR$/app/config/config_test.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoreBundle/EventListener/sendTickets.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding>
+            <element signature="e#44#86#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Controller/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1273">
+          <caret line="103" column="65" lean-forward="false" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="65" />
+          <folding>
+            <element signature="e#125#154#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Billet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3752">
+          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+          <folding>
+            <element signature="e#37#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoreBundle/Entity/Commande.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="243" column="36" lean-forward="true" selection-start-line="243" selection-start-column="36" selection-end-line="243" selection-end-column="36" />
+          <folding>
+            <element signature="e#37#69#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
