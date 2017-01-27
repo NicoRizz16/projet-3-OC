@@ -12,3 +12,11 @@ services:
             - "%tarif_senior%"
             - "%tarif_reduit%"
             - "%tarif_enfant%"
+
+    commande.listener:
+        class: CoreBundle\EventListener\sendTickets
+        arguments:
+            - "@mailer"
+            - "@templating"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
