@@ -82,8 +82,19 @@ class OrderController extends Controller
         }
 
         // Sinon on affiche la vue avec le formulaire
+        // Récupération des tarifs pour les passer à la vue
+        $tarifNormal = $this->container->getParameter('tarif_normal');
+        $tarifSenior = $this->container->getParameter('tarif_senior');
+        $tarifReduit = $this->container->getParameter('tarif_reduit');
+        $tarifEnfant = $this->container->getParameter('tarif_enfant');
+
         return $this->render('CoreBundle:Order:infosBillets.html.twig', array(
             'form' => $form->createView(),
+            'tarifNormal' => $tarifNormal,
+            'tarifSenior' => $tarifSenior,
+            'tarifReduit' => $tarifReduit,
+            'tarifEnfant' => $tarifEnfant,
+            'nbBillets' => $commande->getNbBillets()
         ));
 
     }
@@ -113,11 +124,15 @@ class OrderController extends Controller
     {
         // clé secrète Stripe
         \Stripe\Stripe::setApiKey($this->container->getParameter('stripe_private_key'));
-        // Récupération du token généré par le formulaire checkout
-        $token = $request->get('stripeToken');
 
         $session = $request->getSession();
         $commande = $session->get('commande');
+        // Récupération du token généré par le formulaire checkout
+        $token = $request->get('stripeToken');
+
+        if(!$session->get('readyToPay') | !isset($token)){
+            return $this->redirectToRoute('core_paiement');
+        }
 
         try { // On procède au paiement
             \Stripe\Charge::create(array(

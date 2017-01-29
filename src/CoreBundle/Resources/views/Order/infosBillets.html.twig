@@ -7,22 +7,91 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
+    {% form_theme form 'form/fields.html.twig' %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
 
     {# iterate over each existing billet and render it #}
-    {% set i = 1 %}
+    {% set i = 0 %}
     {% for billet in form.billets %}
-        <h2>Billet numéro {{ i }}</h2>
-        <div class="well">
-            {{ form_row(billet.nom) }}
-            {{ form_row(billet.prenom) }}
-            {{ form_row(billet.pays) }}
-            {{ form_row(billet.dateNaissance) }}
-            {{ form_row(billet.tarifReduit) }}
+        <h2>Billet numéro {{ i+1 }}</h2>
+        <div class="row well">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    {{ form_label(billet.nom, 'Nom : ', {'label_attr': {'class': 'control-label col-sm-3'}}) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(billet.nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form_errors(billet.nom) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(billet.prenom, 'Prénom : ', {'label_attr': {'class': 'control-label col-sm-3'}}) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(billet.prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form_errors(billet.prenom) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(billet.pays, 'Pays : ', {'label_attr': {'class': 'control-label col-sm-3'}}) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(billet.pays, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form_errors(billet.pays) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(billet.dateNaissance, 'Date de naissance : ', {'label_attr': {'class': 'control-label col-sm-3'}}) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(billet.dateNaissance) }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form_errors(billet.dateNaissance) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(billet.tarifReduit, 'Tarif réduit ', {'label_attr': {'class': 'control-label col-xs-3'}}) }}
+                    <div class="checkbox col-xs-8">
+                        {{ form_widget(billet.tarifReduit) }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form_errors(billet.tarifReduit) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <h2 id="tarif{{ i }}" class="tarif">Tarif "Senior"</h2>
+                <h3 id="prix{{ i }}" class="prix">{{ tarifSenior }} €</h3>
+            </div>
         </div>
         {% set i = i + 1 %}
     {% endfor %}
 
+    <div class="col-md-12 text-center">
+        {{ form_widget(form.valider, {'attr': {'class': 'btn btn-primary btn-lg'}}) }}
+    </div>
+
     {{ form_end(form) }}
 
+    <script>
+        var tarifNormal = {{ tarifNormal }};
+        var tarifSenior = {{ tarifSenior }};
+        var tarifReduit = {{ tarifReduit }};
+        var tarifEnfant = {{ tarifEnfant }};
+        var nbBillets = {{ nbBillets }};
+    </script>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?jsqueeze'
+    'bundles/core/js/infosBillets.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
