@@ -66,7 +66,7 @@
             </div>
             <div class="col-sm-4 text-center">
                 <h2 id="tarif{{ i }}" class="tarif">Tarif "Senior"</h2>
-                <h3 id="prix{{ i }}" class="prix">{{ tarifSenior }} €</h3>
+                <h3 id="prix{{ i }}" class="prix">{% if typeBillet == "Demi-journée" %}{{ tarifSenior/2 }}{% else %}{{ tarifSenior }}{% endif %} €</h3>
             </div>
         </div>
         {% set i = i + 1 %}
@@ -79,10 +79,10 @@
     {{ form_end(form) }}
 
     <script>
-        var tarifNormal = {{ tarifNormal }};
-        var tarifSenior = {{ tarifSenior }};
-        var tarifReduit = {{ tarifReduit }};
-        var tarifEnfant = {{ tarifEnfant }};
+        var tarifNormal = {% if typeBillet == "Demi-journée" %}{{ tarifNormal/2 }}{% else %}{{ tarifNormal }}{% endif %};
+        var tarifSenior = {% if typeBillet == "Demi-journée" %}{{ tarifSenior/2 }}{% else %}{{ tarifSenior }}{% endif %};
+        var tarifReduit = {% if typeBillet == "Demi-journée" %}{{ tarifReduit/2 }}{% else %}{{ tarifReduit }}{% endif %};
+        var tarifEnfant = {% if typeBillet == "Demi-journée" %}{{ tarifEnfant/2 }}{% else %}{{ tarifEnfant }}{% endif %};
         var nbBillets = {{ nbBillets }};
     </script>
 

@@ -3,6 +3,7 @@ parameters:
     tarif_senior: 12
     tarif_reduit: 10
     tarif_enfant: 8
+    tickets_max_jour: 1000  # Nombre de tickets maximum vendus par jour
 
 services:
     core.setprice:
@@ -18,5 +19,14 @@ services:
         arguments:
             - "@mailer"
             - "@templating"
+            - "@knp_snappy.pdf"
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+
+    core.museum_not_full_validator:
+            class: CoreBundle\Validator\MuseumNotFullValidator
+            arguments:
+                - "@doctrine.orm.entity_manager"
+                - "%tickets_max_jour%"
+            tags:
+                - { name: validator.constraint_validator }

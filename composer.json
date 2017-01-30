@@ -31,7 +31,9 @@
         "symfony/assetic-bundle": "^2.7.1",
         "leafo/scssphp": "~0.6",
         "patchwork/jsqueeze": "~1.0",
-        "stripe/stripe-php": "4.*"
+        "stripe/stripe-php": "4.*",
+        "profburial/wkhtmltopdf-binaries-osx": "0.12.1",
+        "knplabs/knp-snappy-bundle": "~1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

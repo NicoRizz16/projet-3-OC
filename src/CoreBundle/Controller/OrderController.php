@@ -94,7 +94,8 @@ class OrderController extends Controller
             'tarifSenior' => $tarifSenior,
             'tarifReduit' => $tarifReduit,
             'tarifEnfant' => $tarifEnfant,
-            'nbBillets' => $commande->getNbBillets()
+            'nbBillets' => $commande->getNbBillets(),
+            'typeBillet' => $commande->getTypeBillet()
         ));
 
     }
@@ -174,4 +175,5 @@ class OrderController extends Controller
     {
         return $this->render('CoreBundle:Order:erreur.html.twig');
     }
+
 }

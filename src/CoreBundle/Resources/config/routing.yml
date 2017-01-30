@@ -21,5 +21,3 @@ core_confirm:
 core_erreur:
     path:    /erreur
     defaults: { _controller: CoreBundle:Order:erreur }
-
-
