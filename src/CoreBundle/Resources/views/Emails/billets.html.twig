@@ -1,0 +1,20 @@
+<h3>Votre réservation a bien été prise en compte. Imprimez cet e-mail et utilisez le comme justificatif de votre réservation le jour de votre visite.</h3>
+
+{# iterate over each existing billet and render it #}
+    {% set i = 1 %}
+    {% for billet in commande.billets %}
+        <h2>Billet numéro {{ i }}</h2>
+        <div class="well">
+            Type de billet : {{ commande.typeBillet }} <br/>
+            Jour de la visite : {{ commande.dateVisite|date('Y-m-d') }} <br/>
+            Nom : {{ billet.nom }} <br/>
+            Prénom : {{ billet.prenom }} <br/>
+            Pays : {{ billet.pays }} <br/>
+            Date de naissance : {{ billet.dateNaissance|date('Y-m-d') }} <br/>
+            Tarif : {{ billet.tarif }} <br/>
+            Prix : {{ billet.prix }} <br/>
+            Code : {{ billet.code }}
+        </div>
+        {% set i = i + 1 %}
+    {% endfor %}
+<h3 class="text-center">Prix total : {{ commande.prixTotal }} €</h3>

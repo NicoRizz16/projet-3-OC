@@ -1,4 +1,22 @@
+parameters:
+    tarif_normal: 16
+    tarif_senior: 12
+    tarif_reduit: 10
+    tarif_enfant: 8
+
 services:
-#    core.example:
-#        class: CoreBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    core.setprice:
+        class: CoreBundle\SetPrice\SetPrice
+        arguments:
+            - "%tarif_normal%"
+            - "%tarif_senior%"
+            - "%tarif_reduit%"
+            - "%tarif_enfant%"
+
+    commande.listener:
+        class: CoreBundle\EventListener\sendTickets
+        arguments:
+            - "@mailer"
+            - "@templating"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

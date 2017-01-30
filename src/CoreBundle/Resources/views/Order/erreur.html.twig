@@ -1,0 +1,14 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Confirmation - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h2>Une erreur s'est produite...</h2>
+        {% for message in app.session.flashbag.get('erreur') %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endfor %}
+
+{% endblock %}

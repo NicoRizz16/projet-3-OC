@@ -1,9 +1,13 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
-#    parameter_name: value
+    tickets_max_jour: 1000  # Nombre de tickets maximum vendus par jour
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    core.museum_not_full_validator:
+        class: CoreBundle\Validator\MuseumNotFullValidator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%tickets_max_jour%"
+        tags:
+            - { name: validator.constraint_validator }

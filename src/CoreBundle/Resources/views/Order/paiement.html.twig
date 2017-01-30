@@ -1,0 +1,43 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Règlement - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h2>Récapitulatif</h2>
+    {# iterate over each existing billet and render it #}
+    {% set i = 1 %}
+    {% for billet in commande.billets %}
+        <h2>Billet numéro {{ i }}</h2>
+        <div class="well">
+            Type de billet : {{ commande.typeBillet }} <br/>
+            Jour de la visite : {{ commande.dateVisite|date('Y-m-d') }} <br/>
+            Nom : {{ billet.nom }} <br/>
+            Prénom : {{ billet.prenom }} <br/>
+            Pays : {{ billet.pays }} <br/>
+            Date de naissance : {{ billet.dateNaissance|date('Y-m-d') }} <br/>
+            Tarif : {{ billet.tarif }} <br/>
+            Prix : {{ billet.prix }} <br/>
+            <a href="{{ path('core_infosBillets') }}" class="btn btn-primary">Modifier</a>
+        </div>
+        {% set i = i + 1 %}
+    {% endfor %}
+    <h2 class="text-center">Prix total : {{ commande.prixTotal }} €</h2>
+
+    <form action="{{ path('core_confirm') }}" method="POST">
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ key }}"
+                data-amount="{{ commande.prixTotal }}00"
+                data-name="Demo Site"
+                data-description="Widget"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-zip-code="true"
+                data-currency="eur">
+        </script>
+    </form>
+
+{% endblock %}
