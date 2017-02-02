@@ -3,6 +3,7 @@
 namespace CoreBundle\SetPrice;
 
 use CoreBundle\Entity\Commande;
+use CoreBundle\Entity\Billet;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class SetPrice
@@ -29,20 +30,7 @@ class SetPrice
                 $billet->setTarif("Tarif réduit");
                 $billet->setPrix($this->tarif_reduit);
             } else { // Sinon on calcule le tarif en fonction de l'âge
-                $age = $this->getAge($billet->getDateNaissance());
-                if($age < 4){
-                    $billet->setTarif("Gratuit");
-                    $billet->setPrix($age);
-                } elseif ($age < 12){
-                    $billet->setTarif("Tarif enfant");
-                    $billet->setPrix($this->tarif_enfant);
-                } elseif ($age < 60){
-                    $billet->setTarif("Tarif normal");
-                    $billet->setPrix($this->tarif_normal);
-                } else {
-                    $billet->setTarif("Tarif senior");
-                    $billet->setPrix($this->tarif_senior);
-                }
+                $billet = $this->setTicketPriceByAge($billet);
             }
             // Si les billets sont de type demi-journée, on divise le tarif du billet par 2.
             if($commande->getTypeBillet()=="Demi-journée"){
@@ -54,6 +42,26 @@ class SetPrice
         }
         $commande->setPrixTotal($prixTotal);
         return $commande;
+    }
+
+    public function setTicketPriceByAge(Billet $billet)
+    {
+        $age = $this->getAge($billet->getDateNaissance());
+        if($age < 4){
+            $billet->setTarif("Gratuit");
+            $billet->setPrix(0);
+        } elseif ($age < 12){
+            $billet->setTarif("Tarif enfant");
+            $billet->setPrix($this->tarif_enfant);
+        } elseif ($age < 60){
+            $billet->setTarif("Tarif normal");
+            $billet->setPrix($this->tarif_normal);
+        } else {
+            $billet->setTarif("Tarif senior");
+            $billet->setPrix($this->tarif_senior);
+        }
+
+        return $billet;
     }
 
     public function getAge(\DateTime $dateNaissance)

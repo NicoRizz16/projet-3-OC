@@ -70,7 +70,7 @@ class Commande
      * @var string
      *
      * @ORM\Column(name="typeBillet", type="string", length=255)
-     * @Assert\Choice({"Journée", "Demi-journée"})
+     * @Assert\Choice({"Journée", "Demi-journée"}, strict = true)
      */
     private $typeBillet;
 

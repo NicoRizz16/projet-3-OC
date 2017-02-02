@@ -97,7 +97,6 @@ class OrderController extends Controller
             'nbBillets' => $commande->getNbBillets(),
             'typeBillet' => $commande->getTypeBillet()
         ));
-
     }
 
 
@@ -146,10 +145,10 @@ class OrderController extends Controller
             $body = $e->getJsonBody();
             $err = $body['error'];
             $request->getSession()->getFlashBag()->add('erreur', $err['message']);
-            return $this->redirectToRoute('core_erreur');
+            return $this->redirectToRoute('core_erreur', array('reessayer' => true));
         } catch (\Stripe\Error\Base $e) { // Gestion globale des erreurs
             $request->getSession()->getFlashBag()->add('erreur', 'Nous avons rencontré un problème lors de la procédure du paiement, veuillez réessayer.');
-            return $this->redirectToRoute('core_erreur');
+            return $this->redirectToRoute('core_erreur', array('reessayer' => true));
         }
 
         // Génération d'un code unique pour chaque billet de la commande
@@ -157,10 +156,17 @@ class OrderController extends Controller
             $billet->setCode(uniqid());
         }
 
-        // On enregistre la commande
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($commande);
-        $em->flush();
+        try {
+            // On enregistre la commande
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commande);
+            $em->flush();
+        } catch (\Exception $e){
+            $request->getSession()->getFlashBag()->add('erreur', 'Un problème est survenu lors de l\'enregistrement de votre commande. 
+            Veuillez contacter notre service client au plus vite sinon nous ne pourrons pas identifier vos billets le jour de votre visite.
+            Nous vous prions d\'accepter toutes nos excuses pour ce dérangement.');
+            return $this->redirectToRoute('core_erreur', array('reessayer' => false));
+        }
 
         // On réinitialise la session
         $session->set('commande', null);

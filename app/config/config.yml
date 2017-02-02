@@ -79,5 +79,5 @@ assetic:
 knp_snappy:
     pdf:
         enabled:    true
-        binary:     %kernel.root_dir%/../vendor/bin/wkhtmltopdf-amd64-osx
+        binary:     "%kernel.root_dir%/../vendor/bin/wkhtmltopdf-amd64-osx"
         options:    []
