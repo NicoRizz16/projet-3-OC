@@ -24,6 +24,12 @@ class Billet
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Commande", inversedBy="billets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commande;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -297,5 +303,29 @@ class Billet
     public function getPrix()
     {
         return $this->prix;
+    }
+
+    /**
+     * Set commande
+     *
+     * @param \CoreBundle\Entity\Commande $commande
+     *
+     * @return Billet
+     */
+    public function setCommande(\CoreBundle\Entity\Commande $commande)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \CoreBundle\Entity\Commande
+     */
+    public function getCommande()
+    {
+        return $this->commande;
     }
 }

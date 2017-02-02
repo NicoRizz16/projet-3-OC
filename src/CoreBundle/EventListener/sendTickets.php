@@ -9,11 +9,13 @@ class sendTickets
 {
     private $mailer;
     private $templating;
+    private $snappy;
 
-    public function __construct(\Swift_Mailer $mailer, $templating)
+    public function __construct(\Swift_Mailer $mailer, $templating, $snappy)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
+        $this->snappy = $snappy;
     }
 
     public function postPersist(LifecycleEventArgs $args)
@@ -25,6 +27,18 @@ class sendTickets
             return;
         }
 
+        if (file_exists('bundles/core/pdf/billets.pdf')) {
+            unlink('bundles/core/pdf/billets.pdf');
+        }
+
+        $this->snappy->generateFromHtml(
+            $this->templating->render(
+                'CoreBundle:Pdf:billets.html.twig',
+                array('commande' => $entity)
+            ),
+            'bundles/core/pdf/billets.pdf'
+        );
+
         $message = \Swift_Message::newInstance()
             ->setSubject('Confirmation de votre réservation')
             ->setFrom('billeterie-du-louvre@projet3.nicolasrizzon.fr')
@@ -35,7 +49,8 @@ class sendTickets
                     array('commande' => $entity)
                 ),
                 'text/html'
-            );
+            )
+            ->attach(\Swift_Attachment::fromPath('bundles/core/pdf/billets.pdf'));
 
         $this->mailer->send($message);
     }

@@ -10,6 +10,11 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css">
+        {% stylesheets filter='cssrewrite, ?scssphp'
+        'bundles/core/css/main.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
     {% endblock %}
 </head>
 
@@ -26,17 +31,20 @@
         {% endblock %}
     </div>
 
-    <br/><br/><br/>
     <footer class="navbar-default navbar-fixed-bottom">
-        <br/>
             <p class="text-center">Copyright ... © {{ 'now'|date('Y') }}.</p>
-        <br/><br/>
     </footer>
 </div>
 
 {% block javascripts %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.fr.min.js"></script>
+    {% javascripts filter='?jsqueeze'
+    'bundles/core/js/main.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 </body>

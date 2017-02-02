@@ -1,0 +1,21 @@
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% if compound %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for error in errors %}
+                            <li>{{ error.message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <ul>
+                    {% for error in errors %}
+                        <li><span class="text-danger">{{ error.message }}</span></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

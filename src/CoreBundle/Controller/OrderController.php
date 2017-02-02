@@ -82,10 +82,21 @@ class OrderController extends Controller
         }
 
         // Sinon on affiche la vue avec le formulaire
+        // Récupération des tarifs pour les passer à la vue
+        $tarifNormal = $this->container->getParameter('tarif_normal');
+        $tarifSenior = $this->container->getParameter('tarif_senior');
+        $tarifReduit = $this->container->getParameter('tarif_reduit');
+        $tarifEnfant = $this->container->getParameter('tarif_enfant');
+
         return $this->render('CoreBundle:Order:infosBillets.html.twig', array(
             'form' => $form->createView(),
+            'tarifNormal' => $tarifNormal,
+            'tarifSenior' => $tarifSenior,
+            'tarifReduit' => $tarifReduit,
+            'tarifEnfant' => $tarifEnfant,
+            'nbBillets' => $commande->getNbBillets(),
+            'typeBillet' => $commande->getTypeBillet()
         ));
-
     }
 
 
@@ -113,11 +124,15 @@ class OrderController extends Controller
     {
         // clé secrète Stripe
         \Stripe\Stripe::setApiKey($this->container->getParameter('stripe_private_key'));
-        // Récupération du token généré par le formulaire checkout
-        $token = $request->get('stripeToken');
 
         $session = $request->getSession();
         $commande = $session->get('commande');
+        // Récupération du token généré par le formulaire checkout
+        $token = $request->get('stripeToken');
+
+        if(!$session->get('readyToPay') | !isset($token)){
+            return $this->redirectToRoute('core_paiement');
+        }
 
         try { // On procède au paiement
             \Stripe\Charge::create(array(
@@ -130,10 +145,10 @@ class OrderController extends Controller
             $body = $e->getJsonBody();
             $err = $body['error'];
             $request->getSession()->getFlashBag()->add('erreur', $err['message']);
-            return $this->redirectToRoute('core_erreur');
+            return $this->redirectToRoute('core_erreur', array('reessayer' => true));
         } catch (\Stripe\Error\Base $e) { // Gestion globale des erreurs
             $request->getSession()->getFlashBag()->add('erreur', 'Nous avons rencontré un problème lors de la procédure du paiement, veuillez réessayer.');
-            return $this->redirectToRoute('core_erreur');
+            return $this->redirectToRoute('core_erreur', array('reessayer' => true));
         }
 
         // Génération d'un code unique pour chaque billet de la commande
@@ -141,10 +156,17 @@ class OrderController extends Controller
             $billet->setCode(uniqid());
         }
 
-        // On enregistre la commande
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($commande);
-        $em->flush();
+        try {
+            // On enregistre la commande
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commande);
+            $em->flush();
+        } catch (\Exception $e){
+            $request->getSession()->getFlashBag()->add('erreur', 'Un problème est survenu lors de l\'enregistrement de votre commande. 
+            Veuillez contacter notre service client au plus vite sinon nous ne pourrons pas identifier vos billets le jour de votre visite.
+            Nous vous prions d\'accepter toutes nos excuses pour ce dérangement.');
+            return $this->redirectToRoute('core_erreur', array('reessayer' => false));
+        }
 
         // On réinitialise la session
         $session->set('commande', null);
@@ -159,4 +181,5 @@ class OrderController extends Controller
     {
         return $this->render('CoreBundle:Order:erreur.html.twig');
     }
+
 }

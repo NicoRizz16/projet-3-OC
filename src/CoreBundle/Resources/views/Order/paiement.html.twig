@@ -6,27 +6,53 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Récapitulatif</h2>
+    <h2 class="text-center">Récapitulatif</h2>
     {# iterate over each existing billet and render it #}
     {% set i = 1 %}
     {% for billet in commande.billets %}
-        <h2>Billet numéro {{ i }}</h2>
+        <h3>Billet numéro {{ i }}</h3>
         <div class="well">
-            Type de billet : {{ commande.typeBillet }} <br/>
-            Jour de la visite : {{ commande.dateVisite|date('Y-m-d') }} <br/>
-            Nom : {{ billet.nom }} <br/>
-            Prénom : {{ billet.prenom }} <br/>
-            Pays : {{ billet.pays }} <br/>
-            Date de naissance : {{ billet.dateNaissance|date('Y-m-d') }} <br/>
-            Tarif : {{ billet.tarif }} <br/>
-            Prix : {{ billet.prix }} <br/>
-            <a href="{{ path('core_infosBillets') }}" class="btn btn-primary">Modifier</a>
+            <div class="row">
+                <div class="col-sm-4">
+                    Billet <strong>"{{ commande.typeBillet }}"</strong>
+                </div>
+                <div class="col-sm-4">
+                    <strong>{{ billet.nom|capitalize }}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Jour de la visite : <strong>{{ commande.dateVisite|date('d/m/Y') }}</strong>
+                </div>
+                <div class="col-sm-4">
+                    <strong>{{ billet.prenom|capitalize }}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <strong>{{ billet.tarif }}</strong>
+                </div>
+                <div class="col-sm-4">
+                    Date de naissance : {{ billet.dateNaissance|date('d/m/Y') }}
+                </div>
+                <div class="col-sm-4">
+                    Nationalité : {{ billet.pays }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Prix : {{ billet.prix }} €
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="{{ path('core_infosBillets') }}" class="btn btn-primary btn-xs">Modifier</a>
+            </div>
         </div>
         {% set i = i + 1 %}
     {% endfor %}
     <h2 class="text-center">Prix total : {{ commande.prixTotal }} €</h2>
 
-    <form action="{{ path('core_confirm') }}" method="POST">
+    <form action="{{ path('core_confirm') }}" method="POST" class="text-center">
         <script
                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="{{ key }}"

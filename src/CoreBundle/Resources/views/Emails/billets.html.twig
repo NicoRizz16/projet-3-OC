@@ -1,20 +1,12 @@
-<h3>Votre réservation a bien été prise en compte. Imprimez cet e-mail et utilisez le comme justificatif de votre réservation le jour de votre visite.</h3>
+{% set abs_url = app.request.scheme ~'://' ~ app.request.httpHost %}
+<img src="{{ abs_url ~ asset('bundles/core/images/louvre_logo.jpeg') }}" style="width: 100%">
 
-{# iterate over each existing billet and render it #}
-    {% set i = 1 %}
-    {% for billet in commande.billets %}
-        <h2>Billet numéro {{ i }}</h2>
-        <div class="well">
-            Type de billet : {{ commande.typeBillet }} <br/>
-            Jour de la visite : {{ commande.dateVisite|date('Y-m-d') }} <br/>
-            Nom : {{ billet.nom }} <br/>
-            Prénom : {{ billet.prenom }} <br/>
-            Pays : {{ billet.pays }} <br/>
-            Date de naissance : {{ billet.dateNaissance|date('Y-m-d') }} <br/>
-            Tarif : {{ billet.tarif }} <br/>
-            Prix : {{ billet.prix }} <br/>
-            Code : {{ billet.code }}
-        </div>
-        {% set i = i + 1 %}
-    {% endfor %}
-<h3 class="text-center">Prix total : {{ commande.prixTotal }} €</h3>
+<div style="text-align: center">
+    <h1  style="margin-top: 30px">Musée du Louvre</h1>
+
+    <strong>Votre réservation a bien été prise en compte. <br/>
+        Vous trouverez un pdf contenant vos billets en pièce jointe. <br/>
+        Pensez à imprimer vos billets et à les amener avec vous le jour de votre visite. <br/>
+        Si vous bénéficiez d'un tarif réduit, n'oubliez pas non plus votre justificatif. </strong><br><br>
+        Merci d'avoir utilisé notre service de réservation en ligne et à bientôt !
+</div>
