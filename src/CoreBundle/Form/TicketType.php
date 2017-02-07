@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BilletType extends AbstractType
+class TicketType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,11 +18,11 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('pays', CountryType::class)
-            ->add('dateNaissance', BirthdayType::class)
-            ->add('tarifReduit', CheckboxType::class, array(
+            ->add('name', TextType::class)
+            ->add('firstName', TextType::class)
+            ->add('country', CountryType::class)
+            ->add('dateOfBirth', BirthdayType::class)
+            ->add('reducedFare', CheckboxType::class, array(
                     'label' => 'Tarif réduit',
                     'required' => false
                 )
@@ -36,7 +36,7 @@ class BilletType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CoreBundle\Entity\Billet'
+            'data_class' => 'CoreBundle\Entity\Ticket'
         ));
     }
 
@@ -45,7 +45,7 @@ class BilletType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'corebundle_billet';
+        return 'corebundle_ticket';
     }
 
 

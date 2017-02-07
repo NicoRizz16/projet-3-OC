@@ -15,12 +15,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 class MuseumNotFullValidator extends ConstraintValidator
 {
     private $em;
-    private $ticketsMaxJour;
+    private $max_tickets_per_day;
 
-    public function __construct(EntityManager $em, $ticketsMaxJour)
+    public function __construct(EntityManager $em, $max_tickets_per_day)
     {
         $this->em = $em;
-        $this->ticketsMaxJour = $ticketsMaxJour;
+        $this->max_tickets_per_day = $max_tickets_per_day;
     }
 
     public function Validate($value, Constraint $constraint)
@@ -29,11 +29,11 @@ class MuseumNotFullValidator extends ConstraintValidator
             return;
         }
         // Récupération du nombre de tickets vendus pour la date demandée.
-        $repository = $this->em->getRepository('CoreBundle:Commande');
+        $repository = $this->em->getRepository('CoreBundle:Order');
         $sumTicketsSold = $repository->sumTicketsSold($value);
 
         // Si plus de tickets que le nombre maximum définit ont déjà été vendus => le service de réservation en ligne est fermé pour ce jour.
-        if($sumTicketsSold>$this->ticketsMaxJour){
+        if($sumTicketsSold>$this->max_tickets_per_day){
             $this->context->buildViolation($constraint->message)
                 ->addViolation();
         }

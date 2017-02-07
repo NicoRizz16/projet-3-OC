@@ -13,11 +13,11 @@ class OrderControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('a:contains("Réserver mes billets maintenant")')->count());
     }
 
-    public function testInfosCommande()
+    public function testOrderInfo()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/infosCommande');
+        $crawler = $client->request('GET', '/orderInfo');
 
         $this->assertEquals(1, $crawler->filter('h2:contains("Informations sur la commande")')->count());
 
@@ -25,11 +25,11 @@ class OrderControllerTest extends WebTestCase
         $buttonCrawlerNode = $crawler->selectButton('Valider');
         $form = $buttonCrawlerNode->form();
 
-        $form['corebundle_commande[dateVisite]'] = '2017-03-03';
-        $form['corebundle_commande[typeBillet]']->select('Journée');
-        $form['corebundle_commande[nbBillets]'] = 3;
-        $form['corebundle_commande[mail][first]'] = 'nicolas.rizzon@gmail.com';
-        $form['corebundle_commande[mail][second]'] = 'nicolas.rizzon@gmail.com';
+        $form['corebundle_order[dateVisit]'] = '2017-03-03';
+        $form['corebundle_order[ticketType]']->select('Journée');
+        $form['corebundle_order[ticketsNb]'] = 3;
+        $form['corebundle_order[mail][first]'] = 'nicolas.rizzon@gmail.com';
+        $form['corebundle_order[mail][second]'] = 'nicolas.rizzon@gmail.com';
 
         $crawler = $client->submit($form);
         $crawler = $client->followRedirect();

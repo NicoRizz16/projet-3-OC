@@ -16,35 +16,35 @@
 
     <div class="col-md-5 col-md-offset-1">
         <div class="form-group">
-            {{ form_label(form.dateVisite, 'Jour de la visite : ', {'label_attr': {'class': 'control-label col-sm-4'}}) }}
+            {{ form_label(form.dateVisit, 'Jour de la visite : ', {'label_attr': {'class': 'control-label col-sm-4'}}) }}
             <div class="col-sm-4">
-                {{ form_widget(form.dateVisite, {'attr': {'class': 'form-control js-datepicker'}}) }}
+                {{ form_widget(form.dateVisit, {'attr': {'class': 'form-control js-datepicker'}}) }}
             </div>
             <div class="col-sm-12">
-                {{ form_errors(form.dateVisite) }}
+                {{ form_errors(form.dateVisit) }}
             </div>
         </div>
 
         <div class="form-group">
-            {{ form_label(form.typeBillet, 'Type de billet : ', {'label_attr': {'class': 'control-label col-sm-4'}}) }}
+            {{ form_label(form.ticketType, 'Type de billet : ', {'label_attr': {'class': 'control-label col-sm-4'}}) }}
             <div class="radio col-sm-3">
-                {{ form_widget(form.typeBillet.0) }}{{ form_label(form.typeBillet.0) }}
+                {{ form_widget(form.ticketType.0) }}{{ form_label(form.ticketType.0) }}
             </div>
             <div class="radio col-sm-3">
-                {{ form_widget(form.typeBillet.1) }}{{ form_label(form.typeBillet.1) }}
+                {{ form_widget(form.ticketType.1) }}{{ form_label(form.ticketType.1) }}
             </div>
             <div class="col-sm-12">
-                {{ form_errors(form.typeBillet) }}
+                {{ form_errors(form.ticketType) }}
             </div>
         </div>
 
         <div class="form-group">
-            {{ form_label(form.nbBillets, 'Nombre de billets : ', {'label_attr': {'class': 'control-label col-sm-4'}}) }}
+            {{ form_label(form.ticketsNb, 'Nombre de billets : ', {'label_attr': {'class': 'control-label col-sm-4'}}) }}
             <div class="col-sm-4">
-                {{ form_widget(form.nbBillets, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.ticketsNb, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="col-sm-12">
-                {{ form_errors(form.nbBillets) }}
+                {{ form_errors(form.ticketsNb) }}
             </div>
         </div>
     </div>

@@ -16,19 +16,19 @@ class SetPriceTest extends WebTestCase
 
     public function testSetTicketPriceByAge()
     {
-        $billetNormal = new \CoreBundle\Entity\Billet();
-        $billetNormal->setDateNaissance($this->getTime(-30*365*24*3600));
-        $billetNormal = $this->setPrice->setTicketPriceByAge($billetNormal);
-        $billetEnfant = new \CoreBundle\Entity\Billet();
-        $billetEnfant->setDateNaissance($this->getTime(-8*365*24*3600));
-        $billetEnfant = $this->setPrice->setTicketPriceByAge($billetEnfant);
-        $billetSenior = new \CoreBundle\Entity\Billet();
-        $billetSenior->setDateNaissance($this->getTime(-70*365*24*3600));
-        $billetSenior = $this->setPrice->setTicketPriceByAge($billetSenior);
+        $normalTicket = new \CoreBundle\Entity\Ticket();
+        $normalTicket->setDateOfBirth($this->getTime(-30*365*24*3600));
+        $normalTicket = $this->setPrice->setTicketPriceByAge($normalTicket);
+        $childTicket = new \CoreBundle\Entity\Ticket();
+        $childTicket->setDateOfBirth($this->getTime(-8*365*24*3600));
+        $childTicket = $this->setPrice->setTicketPriceByAge($childTicket);
+        $seniorTicket = new \CoreBundle\Entity\Ticket();
+        $seniorTicket->setDateOfBirth($this->getTime(-70*365*24*3600));
+        $seniorTicket = $this->setPrice->setTicketPriceByAge($seniorTicket);
 
-        $this->assertTrue("Tarif normal" === $billetNormal->getTarif());
-        $this->assertTrue("Tarif enfant" === $billetEnfant->getTarif());
-        $this->assertTrue("Tarif senior" === $billetSenior->getTarif());
+        $this->assertTrue("Tarif normal" === $normalTicket->getFare());
+        $this->assertTrue("Tarif enfant" === $childTicket->getFare());
+        $this->assertTrue("Tarif senior" === $seniorTicket->getFare());
     }
 
     public function getTime($delta)

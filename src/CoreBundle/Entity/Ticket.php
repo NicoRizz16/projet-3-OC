@@ -7,12 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * Billet
+ * Ticket
  *
- * @ORM\Table(name="billet")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\BilletRepository")
+ * @ORM\Table(name="ticket")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\TicketRepository")
  */
-class Billet
+class Ticket
 {
     /**
      * @var int
@@ -24,15 +24,15 @@ class Billet
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Commande", inversedBy="billets")
+     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Order", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $commande;
+    private $order;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      * @Assert\Length(
      *     min = 2,
      *     max = 50,
@@ -40,12 +40,12 @@ class Billet
      *     maxMessage = "Votre nom doit faire au maximum 50 caractères."
      * )
      */
-    private $nom;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="firstName", type="string", length=255)
      * @Assert\Length(
      *     min = 2,
      *     max = 50,
@@ -53,47 +53,47 @@ class Billet
      *     maxMessage = "Votre prenom doit faire au maximum 50 caractères."
      * )
      */
-    private $prenom;
+    private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255)
      * @Assert\Country()
      */
-    private $pays;
+    private $country;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateNaissance", type="date")
+     * @ORM\Column(name="dateOfBirth", type="date")
      * @Assert\Date()
      * @Assert\LessThanOrEqual("today")
      *
      */
-    private $dateNaissance;
+    private $dateOfBirth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tarif", type="string", length=255)
+     * @ORM\Column(name="fare", type="string", length=255)
      */
-    private $tarif;
+    private $fare;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="tarif_reduit", type="boolean")
+     * @ORM\Column(name="reducedFare", type="boolean")
      * @Assert\Type("bool")
      */
-    private $tarifReduit;
+    private $reducedFare;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="prix", type="smallint")
+     * @ORM\Column(name="price", type="smallint")
      */
-    private $prix;
+    private $price;
 
     /**
      * @var string
@@ -114,123 +114,123 @@ class Billet
     }
 
     /**
-     * Set nom
+     * Set name
      *
-     * @param string $nom
+     * @param string $name
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get name
      *
      * @return string
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
-     * Set prenom
+     * Set firstName
      *
-     * @param string $prenom
+     * @param string $firstName
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setPrenom($prenom)
+    public function setFirstName($firstName)
     {
-        $this->prenom = $prenom;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     /**
-     * Get prenom
+     * Get firstName
      *
      * @return string
      */
-    public function getPrenom()
+    public function getFirstName()
     {
-        return $this->prenom;
+        return $this->firstName;
     }
 
     /**
-     * Set pays
+     * Set country
      *
-     * @param string $pays
+     * @param string $country
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setPays($pays)
+    public function setCountry($country)
     {
-        $this->pays = $pays;
+        $this->country = $country;
 
         return $this;
     }
 
     /**
-     * Get pays
+     * Get country
      *
      * @return string
      */
-    public function getPays()
+    public function getCountry()
     {
-        return $this->pays;
+        return $this->country;
     }
 
     /**
-     * Set dateNaissance
+     * Set dateOfBirth
      *
-     * @param \DateTime $dateNaissance
+     * @param \DateTime $dateOfBirth
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setDateNaissance($dateNaissance)
+    public function setDateOfBirth($dateOfBirth)
     {
-        $this->dateNaissance = $dateNaissance;
+        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }
 
     /**
-     * Get dateNaissance
+     * Get dateOfBirth
      *
      * @return \DateTime
      */
-    public function getDateNaissance()
+    public function getDateOfBirth()
     {
-        return $this->dateNaissance;
+        return $this->dateOfBirth;
     }
 
     /**
-     * Set tarif
+     * Set fare
      *
-     * @param string $tarif
+     * @param string $fare
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setTarif($tarif)
+    public function setFare($fare)
     {
-        $this->tarif = $tarif;
+        $this->fare = $fare;
 
         return $this;
     }
 
     /**
-     * Get tarif
+     * Get fare
      *
      * @return string
      */
-    public function getTarif()
+    public function getFare()
     {
-        return $this->tarif;
+        return $this->fare;
     }
 
     /**
@@ -238,7 +238,7 @@ class Billet
      *
      * @param string $code
      *
-     * @return Billet
+     * @return Ticket
      */
     public function setCode($code)
     {
@@ -258,74 +258,74 @@ class Billet
     }
 
     /**
-     * Set tarifReduit
+     * Set reducedFare
      *
-     * @param boolean $tarifReduit
+     * @param boolean $reducedFare
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setTarifReduit($tarifReduit)
+    public function setReducedFare($reducedFare)
     {
-        $this->tarifReduit = $tarifReduit;
+        $this->reducedFare = $reducedFare;
 
         return $this;
     }
 
     /**
-     * Get tarifReduit
+     * Get reducedFare
      *
      * @return boolean
      */
-    public function getTarifReduit()
+    public function getReducedFare()
     {
-        return $this->tarifReduit;
+        return $this->reducedFare;
     }
 
     /**
-     * Set prix
+     * Set price
      *
-     * @param integer $prix
+     * @param integer $price
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setPrix($prix)
+    public function setPrice($price)
     {
-        $this->prix = $prix;
+        $this->price = $price;
 
         return $this;
     }
 
     /**
-     * Get prix
+     * Get price
      *
      * @return integer
      */
-    public function getPrix()
+    public function getPrice()
     {
-        return $this->prix;
+        return $this->price;
     }
 
     /**
-     * Set commande
+     * Set order
      *
-     * @param \CoreBundle\Entity\Commande $commande
+     * @param \CoreBundle\Entity\Order $order
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setCommande(\CoreBundle\Entity\Commande $commande)
+    public function setOrder(\CoreBundle\Entity\Order $order)
     {
-        $this->commande = $commande;
+        $this->order = $order;
 
         return $this;
     }
 
     /**
-     * Get commande
+     * Get order
      *
-     * @return \CoreBundle\Entity\Commande
+     * @return \CoreBundle\Entity\Order
      */
-    public function getCommande()
+    public function getOrder()
     {
-        return $this->commande;
+        return $this->order;
     }
 }

@@ -1,18 +1,18 @@
 parameters:
-    tarif_normal: 16
-    tarif_senior: 12
-    tarif_reduit: 10
-    tarif_enfant: 8
-    tickets_max_jour: 1000  # Nombre de tickets maximum vendus par jour
+    normal_fare: 16
+    senior_fare: 12
+    reduced_fare: 10
+    child_fare: 8
+    max_tickets_per_day: 1000  # Nombre de tickets maximum vendus par jour
 
 services:
     core.setprice:
         class: CoreBundle\SetPrice\SetPrice
         arguments:
-            - "%tarif_normal%"
-            - "%tarif_senior%"
-            - "%tarif_reduit%"
-            - "%tarif_enfant%"
+            - "%normal_fare%"
+            - "%senior_fare%"
+            - "%reduced_fare%"
+            - "%child_fare%"
 
     commande.listener:
         class: CoreBundle\EventListener\sendTickets
@@ -20,6 +20,7 @@ services:
             - "@mailer"
             - "@templating"
             - "@knp_snappy.pdf"
+            - "%mailer_user%"
         tags:
             - { name: doctrine.event_listener, event: postPersist }
 
@@ -27,6 +28,6 @@ services:
             class: CoreBundle\Validator\MuseumNotFullValidator
             arguments:
                 - "@doctrine.orm.entity_manager"
-                - "%tickets_max_jour%"
+                - "%max_tickets_per_day%"
             tags:
                 - { name: validator.constraint_validator }

@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CommandeBilletsType extends AbstractType
+class OrderTicketsType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,8 +16,8 @@ class CommandeBilletsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('billets', CollectionType::class, array(
-                 'entry_type' => BilletType::class
+            ->add('tickets', CollectionType::class, array(
+                 'entry_type' => TicketType::class
             ))
             ->add('valider', SubmitType::class)
         ;
@@ -29,7 +29,7 @@ class CommandeBilletsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CoreBundle\Entity\Commande'
+            'data_class' => 'CoreBundle\Entity\Order'
         ));
     }
 
@@ -38,7 +38,7 @@ class CommandeBilletsType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'corebundle_commandeBillets';
+        return 'corebundle_orderTickets';
     }
 
 

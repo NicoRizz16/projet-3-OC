@@ -2,72 +2,72 @@
 
 namespace CoreBundle\SetPrice;
 
-use CoreBundle\Entity\Commande;
-use CoreBundle\Entity\Billet;
+use CoreBundle\Entity\Order;
+use CoreBundle\Entity\Ticket;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class SetPrice
 {
-    private $tarif_normal;
-    private $tarif_senior;
-    private $tarif_reduit;
-    private $tarif_enfant;
+    private $normal_fare;
+    private $senior_fare;
+    private $reduced_fare;
+    private $child_fare;
 
-    public function __construct($tarif_normal, $tarif_senior, $tarif_reduit, $tarif_enfant)
+    public function __construct($normal_fare, $senior_fare, $reduced_fare, $child_fare)
     {
-        $this->tarif_normal = $tarif_normal;
-        $this->tarif_senior = $tarif_senior;
-        $this->tarif_reduit = $tarif_reduit;
-        $this->tarif_enfant = $tarif_enfant;
+        $this->normal_fare = $normal_fare;
+        $this->senior_fare = $senior_fare;
+        $this->reduced_fare = $reduced_fare;
+        $this->child_fare = $child_fare;
     }
 
-    public function setTicketsPrice(Commande $commande)
+    public function setTicketsPrice(Order $order)
     {
-        $prixTotal = 0;
-        // Traitement de tous les billets de la commande un par un
-        foreach ($commande->getBillets() as $billet){
-            if($billet->getTarifReduit()){  // Si le billet bénéficie d'un tarif réduit
-                $billet->setTarif("Tarif réduit");
-                $billet->setPrix($this->tarif_reduit);
+        $totalPrice = 0;
+        // Traitement de tous les tickets de la commande un par un
+        foreach ($order->getTickets() as $ticket){
+            if($ticket->getReducedFare()){  // Si le ticket bénéficie d'un tarif réduit
+                $ticket->setFare("Tarif réduit");
+                $ticket->setPrice($this->reduced_fare);
             } else { // Sinon on calcule le tarif en fonction de l'âge
-                $billet = $this->setTicketPriceByAge($billet);
+                $ticket = $this->setTicketPriceByAge($ticket);
             }
-            // Si les billets sont de type demi-journée, on divise le tarif du billet par 2.
-            if($commande->getTypeBillet()=="Demi-journée"){
-                $billet->setPrix($billet->getPrix()/2);
+            // Si les tickets sont de type demi-journée, on divise le tarif du ticket par 2.
+            if($order->getTicketType()=="Demi-journée"){
+                $ticket->setPrice($ticket->getPrice()/2);
             }
 
-            // On ajoute le prix du billet au prix total
-            $prixTotal += $billet->getPrix();
+            // On ajoute le prix du ticket au prix total
+            $totalPrice += $ticket->getPrice();
         }
-        $commande->setPrixTotal($prixTotal);
-        return $commande;
+        $order->setTotalPrice($totalPrice);
+        return $order;
     }
 
-    public function setTicketPriceByAge(Billet $billet)
+    public function setTicketPriceByAge(ticket $ticket)
     {
-        $age = $this->getAge($billet->getDateNaissance());
+        $age = $this->getAge($ticket->getDateOfBirth());
         if($age < 4){
-            $billet->setTarif("Gratuit");
-            $billet->setPrix(0);
+            $ticket->setFare("Gratuit");
+            $ticket->setPrice(0);
         } elseif ($age < 12){
-            $billet->setTarif("Tarif enfant");
-            $billet->setPrix($this->tarif_enfant);
+            $ticket->setFare("Tarif enfant");
+            $ticket->setPrice($this->child_fare);
         } elseif ($age < 60){
-            $billet->setTarif("Tarif normal");
-            $billet->setPrix($this->tarif_normal);
+            $ticket->setFare("Tarif normal");
+            $ticket->setPrice($this->normal_fare);
         } else {
-            $billet->setTarif("Tarif senior");
-            $billet->setPrix($this->tarif_senior);
+            $ticket->setFare("Tarif senior");
+            $ticket->setPrice($this->senior_fare);
         }
 
-        return $billet;
+        return $ticket;
     }
 
-    public function getAge(\DateTime $dateNaissance)
+    public function getAge(\DateTime $dateOfBirth)
     {
-        $dateDuJour = new \DateTime();
-        $interval = $dateNaissance->diff($dateDuJour);
+        $now = new \DateTime();
+        $interval = $dateOfBirth->diff($now);
         return $interval->format('%y');
     }
 

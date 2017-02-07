@@ -7,12 +7,12 @@
 
 {% block body %}
     <h2>Une erreur s'est produite...</h2>
-    {% for message in app.session.flashbag.get('erreur') %}
+    {% for message in app.session.flashbag.get('error') %}
         <div class="alert alert-warning">{{ message }}</div>
     {% endfor %}
-    {% if reessayer == true %}
+    {% if retry == "true" %}
         <div class="text-center">
-            <a href="{{ path('core_paiement') }}" class="btn btn-primary btn-lg">Réessayer</a>
+            <a href="{{ path('core_payment') }}" class="btn btn-primary btn-lg">Réessayer</a>
         </div>
     {% endif %}
 

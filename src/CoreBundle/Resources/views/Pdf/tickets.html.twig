@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    {% set abs_url = app.request.scheme ~'://' ~ app.request.httpHost %}
+    <img src="{{ abs_url ~ asset('bundles/core/images/louvre_logo.jpeg') }}" style="width: 100%">
+
+    <h1 style="text-align: center; border-bottom: 1px solid black; font-family: Georgia, sans-serif;">Musée du Louvre - Billeterie</h1>
+
+    {# iterate over each existing billet and render it #}
+        {% set i = 1 %}
+        {% for ticket in order.tickets %}
+            <div style="border-bottom: 1px solid black; margin-bottom: 20px;">
+                <h2>Billet numéro {{ i }}</h2>
+                Billet <strong>"{{ order.ticketType }}"</strong><br>
+                Jour de la visite : <strong>{{ order.dateVisit|date('d/m/Y') }}</strong><br>
+                <strong>{{ ticket.fare }}</strong><br>
+                Prix : {{ ticket.price }} €<br><br>
+
+                <strong>{{ ticket.name|capitalize }}</strong><br>
+                <strong>{{ ticket.firstName|capitalize }}</strong><br>
+                Date de naissance : {{ ticket.dateOfBirth|date('d/m/Y') }}<br>
+                Nationalité : {{ ticket.country }}<br><br>
+
+                <strong>Code billet : {{ ticket.code }}</strong>
+            </div>
+            {% set i = i + 1 %}
+        {% endfor %}
+    <h3 style="text-align: center"> Prix total : {{ order.totalPrice }} €</h3>
+</body>
+</html>

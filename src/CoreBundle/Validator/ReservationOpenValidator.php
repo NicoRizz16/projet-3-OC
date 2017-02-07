@@ -21,34 +21,34 @@ class ReservationOpenValidator extends ConstraintValidator
         }
 
         // Récupération du jour de la semaine (0 = dimanche et 6 = samedi)
-        $jourSemaine = $value->format('w');
+        $dayOfWeek = $value->format('w');
         // Récupération du jour du mois
-        $jour = $value->format('j');
+        $day = $value->format('j');
         // Récupération du mois
-        $mois = $value->format('n');
+        $month = $value->format('n');
 
         // Si le jour est un mardi, un 1er mai, un 1er novembre ou un 25 décembre => le musée est fermé
-        if ($jourSemaine == 2 || ($jour == 1 && ($mois == 5 || $mois == 11)) || ($jour == 25 && $mois == 12)){
+        if ($dayOfWeek == 2 || ($day == 1 && ($month == 5 || $month == 11)) || ($day == 25 && $month == 12)){
             $this->context->buildViolation($constraint->museumClose)
                 ->setParameter('%date%', $value->format('d-m-Y'))
                 ->addViolation();
         }
 
         // Si le jour est un dimanche ou un jour férié où le musée est ouvert => La réservation en ligne est impossible
-        if($jourSemaine == 0 || $this->joursFeriesOuvert($value)){
+        if($dayOfWeek == 0 || $this->OpenedPublicHoliday($value)){
             $this->context->buildViolation($constraint->reservationClose)
                 ->addViolation();
         }
     }
 
     // Méthode récupérant les jours fériés en France où le musée est ouvert mais pas le service de réservation en ligne
-    public function joursFeriesOuvert(\DateTime $date){
-        $EstUnJourFerieOuvert = false;
+    public function OpenedPublicHoliday(\DateTime $date){
+        $IsOpenedPublicHoliday = false;
         $year = $date->format('Y');
         // On récupère le jour et le mois de Pâques pour l'année en cours
         $easterDate  = easter_date($year);
 
-        $joursFeriesOuverts = array(
+        $OpenedPublicHolidays = array(
             // Dates fixes (la toussaint, la fête du travail et le jour de noël sont des jours fériés où le musée est fermé)
             new \DateTime($year.'-01-01'), // 1er janvier
             new \DateTime($year.'-05-08'), // Victoire des alliés
@@ -62,12 +62,12 @@ class ReservationOpenValidator extends ConstraintValidator
         );
 
         // Verification si la date correspond à un des jours fériés de la liste
-        foreach ($joursFeriesOuverts as $jour){
-            if($jour == $date){
-                $EstUnJourFerieOuvert = true;
+        foreach ($OpenedPublicHolidays as $day){
+            if($day == $date){
+                $IsOpenedPublicHoliday = true;
             }
         }
 
-        return $EstUnJourFerieOuvert;
+        return $IsOpenedPublicHoliday;
     }
 }

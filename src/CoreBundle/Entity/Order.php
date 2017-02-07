@@ -9,12 +9,12 @@ use CoreBundle\Validator\MuseumNotFull;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * Commande
+ * Order
  *
- * @ORM\Table(name="commande")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\CommandeRepository")
+ * @ORM\Table(name="order_table")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\OrderRepository")
  */
-class Commande
+class Order
 {
     /**
      * @var int
@@ -28,9 +28,9 @@ class Commande
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCommande", type="datetime")
+     * @ORM\Column(name="orderDate", type="datetime")
      */
-    private $dateCommande;
+    private $orderDate;
 
     /**
      * @var string
@@ -44,15 +44,15 @@ class Commande
     private $mail;
 
     /**
-     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Ticket", mappedBy="order", cascade={"persist", "remove"}, orphanRemoval=true)
      * @Assert\Valid
      */
-    private $billets;
+    private $tickets;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbBillets", type="smallint")
+     * @ORM\Column(name="ticketsNb", type="smallint")
      * @Assert\Type(
      *     type="integer",
      *     message="La valeur entrée n'est pas un type valide."
@@ -64,40 +64,40 @@ class Commande
      *      maxMessage = "Vous ne pouvez pas commander plus de 30 billets d'un coup."
      * )
      */
-    private $nbBillets;
+    private $ticketsNb;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="typeBillet", type="string", length=255)
+     * @ORM\Column(name="ticketType", type="string", length=255)
      * @Assert\Choice({"Journée", "Demi-journée"}, strict = true)
      */
-    private $typeBillet;
+    private $ticketType;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateVisite", type="datetime")
+     * @ORM\Column(name="dateVisit", type="datetime")
      * @Assert\Date()
      * @Assert\GreaterThanOrEqual("today")
      * @ReservationOpen()
      * @MuseumNotFull()
      */
-    private $dateVisite;
+    private $dateVisit;
 
     /**
      * @var int
-     * @ORM\Column(name="prixTotal", type="integer")
+     * @ORM\Column(name="totalPrice", type="integer")
      */
-    private $prixTotal;
+    private $totalPrice;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->dateCommande = new \Datetime();
-        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderDate = new \Datetime();
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -112,27 +112,27 @@ class Commande
     }
 
     /**
-     * Set dateCommande
+     * Set orderDate
      *
-     * @param \DateTime $dateCommande
+     * @param \DateTime $orderDate
      *
-     * @return Commande
+     * @return Order
      */
-    public function setDateCommande($dateCommande)
+    public function setOrderDate($orderDate)
     {
-        $this->dateCommande = $dateCommande;
+        $this->orderDate = $orderDate;
 
         return $this;
     }
 
     /**
-     * Get dateCommande
+     * Get orderDate
      *
      * @return \DateTime
      */
-    public function getDateCommande()
+    public function getOrderDate()
     {
-        return $this->dateCommande;
+        return $this->orderDate;
     }
 
     /**
@@ -140,7 +140,7 @@ class Commande
      *
      * @param string $mail
      *
-     * @return Commande
+     * @return Order
      */
     public function setMail($mail)
     {
@@ -160,153 +160,153 @@ class Commande
     }
 
     /**
-     * Set nbBillets
+     * Set ticketsNb
      *
-     * @param integer $nbBillets
+     * @param integer $ticketsNb
      *
-     * @return Commande
+     * @return Order
      */
-    public function setNbBillets($nbBillets)
+    public function setTicketsNb($ticketsNb)
     {
-        $this->nbBillets = $nbBillets;
+        $this->ticketsNb = $ticketsNb;
 
         return $this;
     }
 
     /**
-     * Get nbBillets
+     * Get ticketsNb
      *
      * @return int
      */
-    public function getNbBillets()
+    public function getTicketsNb()
     {
-        return $this->nbBillets;
+        return $this->ticketsNb;
     }
 
     /**
-     * Set typeBillet
+     * Set ticketType
      *
-     * @param string $typeBillet
+     * @param string $ticketType
      *
-     * @return Commande
+     * @return Order
      */
-    public function setTypeBillet($typeBillet)
+    public function setTicketType($ticketType)
     {
-        $this->typeBillet = $typeBillet;
+        $this->ticketType = $ticketType;
 
         return $this;
     }
 
     /**
-     * Get typeBillet
+     * Get ticketType
      *
      * @return string
      */
-    public function getTypeBillet()
+    public function getTicketType()
     {
-        return $this->typeBillet;
+        return $this->ticketType;
     }
 
     /**
-     * Set dateVisite
+     * Set dateVisit
      *
-     * @param \DateTime $dateVisite
+     * @param \DateTime $dateVisit
      *
-     * @return Commande
+     * @return Order
      */
-    public function setDateVisite($dateVisite)
+    public function setDateVisit($dateVisit)
     {
-        $this->dateVisite = $dateVisite;
+        $this->dateVisit = $dateVisit;
 
         return $this;
     }
 
     /**
-     * Get dateVisite
+     * Get dateVisit
      *
      * @return \DateTime
      */
-    public function getDateVisite()
+    public function getDateVisit()
     {
-        return $this->dateVisite;
+        return $this->dateVisit;
     }
 
     /**
-     * Add billet
+     * Add ticket
      *
-     * @param \CoreBundle\Entity\Billet $billet
+     * @param \CoreBundle\Entity\Ticket $ticket
      *
-     * @return Commande
+     * @return Order
      */
-    public function addBillet(\CoreBundle\Entity\Billet $billet)
+    public function addTicket(\CoreBundle\Entity\Ticket $ticket)
     {
-        $this->billets[] = $billet;
-        $billet->setCommande($this);
+        $this->tickets[] = $ticket;
+        $ticket->setOrder($this);
         return $this;
     }
 
     /**
-     * Remove billet
+     * Remove ticket
      *
-     * @param \CoreBundle\Entity\Billet $billet
+     * @param \CoreBundle\Entity\Ticket $ticket
      */
-    public function removeBillet(\CoreBundle\Entity\Billet $billet)
+    public function removeTicket(\CoreBundle\Entity\Ticket $ticket)
     {
-        $this->billets->removeElement($billet);
+        $this->tickets->removeElement($ticket);
     }
 
     /**
-     * Get billets
+     * Get tickets
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBillets()
+    public function getTickets()
     {
-        return $this->billets;
+        return $this->tickets;
     }
 
     /**
-     * Set prixTotal
+     * Set totalPrice
      *
-     * @param integer $prixTotal
+     * @param integer $totalPrice
      *
-     * @return Commande
+     * @return Order
      */
-    public function setPrixTotal($prixTotal)
+    public function setTotalPrice($totalPrice)
     {
-        $this->prixTotal = $prixTotal;
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
 
     /**
-     * Get prixTotal
+     * Get totalPrice
      *
      * @return integer
      */
-    public function getPrixTotal()
+    public function getTotalPrice()
     {
-        return $this->prixTotal;
+        return $this->totalPrice;
     }
 
     /**
      * @Assert\Callback
      */
-    public function isTypeBilletValid(ExecutionContextInterface $context)
+    public function isTicketTypeValid(ExecutionContextInterface $context)
     {
-        $dateDuJour = new \DateTime();
-        $dateEntree = $this->getDateVisite();
+        $now = new \DateTime();
+        $dateVisit = $this->getDateVisit();
         // Si la date entrée est différente de la date du jour, les 2 types de billets sont possible
-        if($dateDuJour->format('Y-m-d') != $dateEntree->format('Y-m-d')) {
+        if($now->format('Y-m-d') != $dateVisit->format('Y-m-d')) {
             return;
         }
 
         // On vérifie qu'un billet de type journée n'est pas commandé le jour même après 14h.
-        if ($this->getTypeBillet() == "Journée" && $dateDuJour->format('G') >= 14){
+        if ($this->getTicketType() == "Journée" && $now->format('G') >= 14){
             // La règle est violée, on définit l'erreur
             $context
                 ->buildViolation('Vous ne pouvez pas réserver un billet de type "journée" le jour même après 14h.')
-                ->atPath('typeBillet')
+                ->atPath('ticketType')
                 ->addViolation();
         }
     }

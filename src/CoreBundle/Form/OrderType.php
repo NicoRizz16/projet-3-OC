@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CommandeType extends AbstractType
+class OrderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -20,18 +20,23 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateVisite', DateType::class, array(
+            ->add('dateVisit', DateType::class, array(
               'widget' => 'single_text',
               'html5' => false
             ))
-            ->add('typeBillet',ChoiceType::class, array(
+            ->add('ticketType',ChoiceType::class, array(
                 'choices' => array('Journée' => "Journée", "Demi-journée" => "Demi-journée"),
                 'expanded' => true,
                 'multiple' => false,
                 'data' => 'Journée'
             ))
-            ->add('nbBillets', IntegerType::class, array(
+            ->add('ticketsNb', IntegerType::class, array(
                 'scale' => 0,
+                'attr' => array(
+                    'step' => 1,
+                    'min' => 0,
+                    'max' => 30
+                ),
                 'label' => "Nombre de billets"
             ))
             ->add('mail', RepeatedType::class, array(
@@ -50,7 +55,7 @@ class CommandeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CoreBundle\Entity\Commande'
+            'data_class' => 'CoreBundle\Entity\Order'
         ));
     }
 
@@ -59,7 +64,7 @@ class CommandeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'corebundle_commande';
+        return 'corebundle_order';
     }
 
 
